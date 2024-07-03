@@ -1,4 +1,6 @@
 from smartphone import Smartphone
+
+
 catalog = []
 tel_1 = Smartphone("Huawei", "nova 11 Pro", "+79055556677")
 tel_2 = Smartphone("Samsung", "Galaxy A54 5G", "+79056596670")
