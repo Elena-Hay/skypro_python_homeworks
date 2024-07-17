@@ -19,7 +19,7 @@ def test_negative_capitilize(input, result):
 @pytest.mark.xfail
 @pytest.mark.parametrize('input, result', 
 [(12345, "12345")])
-def test_negative_capitilize(input, result):
+def test_negative_capitilize_int(input, result):
     string_utils = StringUtils()
     res = string_utils.capitilize(input)
     assert res == result
@@ -42,7 +42,7 @@ def test_negative_trim(input, result):
 @pytest.mark.xfail
 @pytest.mark.parametrize('input, result', 
 [(12345, "12345")])
-def test_negative_trim(input, result):
+def test_negative_trim_int(input, result):
     string_utils = StringUtils()
     res = string_utils.trim(input)
     assert res == result
@@ -71,7 +71,7 @@ def test_negative_to_list(input, delimeter, result):
 @pytest.mark.xfail
 @pytest.mark.parametrize('input, delimeter, result', 
 [(12345, None, [])])
-def test_negative_to_list(input, delimeter, result):
+def test_negative_to_list_int(input, delimeter, result):
     string_utils = StringUtils()
     if delimeter is None:
         res = string_utils.to_list(input)
@@ -90,7 +90,7 @@ def test_positive_contains(string, symbol, result):
 @pytest.mark.xfail
 @pytest.mark.parametrize('string, symbol, result', 
 [(None, "k", False), (12345, "g", False)])
-def test_negative_contains(string, symbol, result):
+def test_negative_contains_int(string, symbol, result):
     string_utils = StringUtils()
     res = string_utils.contains(string, symbol)
     assert res == result
@@ -113,7 +113,7 @@ def test_negative_delete_symbol(string, symbol, result):
 @pytest.mark.xfail
 @pytest.mark.parametrize('string, symbol, result',
 [(12345, "g", "12345"), (None, "k", None)])
-def test_negative_delete_symbol(string, symbol, result):
+def test_negative_delete_symbol_int(string, symbol, result):
     string_utils = StringUtils()
     res = string_utils.delete_symbol(string, symbol)
     assert res == result
@@ -129,7 +129,7 @@ def test_positive_starts_with(string, symbol, result):
 @pytest.mark.xfail
 @pytest.mark.parametrize('string, symbol, result', 
 [(None, "k", False), (12345, "g", False)])
-def test_negative_starts_with(string, symbol, result):
+def test_negative_starts_with_int(string, symbol, result):
     string_utils = StringUtils()
     res = string_utils.starts_with(string, symbol)
     assert res == result
@@ -145,7 +145,7 @@ def test_positive_end_with(string, symbol, result):
 @pytest.mark.xfail
 @pytest.mark.parametrize('string, symbol, result', 
 [(None, "k", False), (12345, "g", False)])
-def test_negative_end_with(string, symbol, result):
+def test_negative_end_with_int(string, symbol, result):
     string_utils = StringUtils()
     res = string_utils.end_with(string, symbol)
     assert res == result
@@ -161,7 +161,7 @@ def test_positive_is_empty(string, result):
 @pytest.mark.xfail
 @pytest.mark.parametrize('string, result', 
 [(None, False), (12345, False)])
-def test_positive_is_empty(string, result):
+def test_positive_is_empty_int(string, result):
     string_utils = StringUtils()
     res = string_utils.is_empty(string)
     assert res == result
