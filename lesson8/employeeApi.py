@@ -5,7 +5,7 @@ class EmployeeApi:
     def __init__(self, url) -> None:
         self.url = url
     
-    def get_token(self, user='bloom', password='fire-fairy'):
+    def get_token(self, user='flora', password='nature-fairy'):
         creds = {
             'username': user,
             'password': password
@@ -21,6 +21,16 @@ class EmployeeApi:
         my_headers = {}
         my_headers["x-client-token"] = self.get_token()
         resp = requests.post(self.url + '/company', json=company, headers=my_headers)
+        return resp.json()
+    
+    def get_company_list(self, params_to_add=None):
+        resp = requests.get(self.url + '/company', params=params_to_add)
+        return resp.json()
+    
+    def delete_company(self, id):
+        my_headers = {}
+        my_headers["x-client-token"] = self.get_token()
+        resp = requests.get(self.url + '/company/delete/' + str(id), headers=my_headers)
         return resp.json()
     
     def create_employee(self, f_name, l_name, id_com, phone, isActive):
@@ -40,7 +50,7 @@ class EmployeeApi:
         resp = requests.get(self.url + '/employee/' + str(id))
         return resp.json()
 
-    def get_employee_list(self, params_to_add=None):
+    def get_employee_list(self, params_to_add):
         resp = requests.get(self.url + '/employee', params=params_to_add)
         return resp.json()
     

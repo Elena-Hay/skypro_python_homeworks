@@ -22,7 +22,7 @@ def test_add_new_employee_id():
 
     #Получение сотрудника по id
     new_employee = api.get_employee(id_emp)
-
+    
     assert new_employee["id"] == id_emp
     assert new_employee["firstName"] == f_name
     assert new_employee["lastName"] == l_name
@@ -30,12 +30,23 @@ def test_add_new_employee_id():
     assert new_employee["phone"] == phone
     assert new_employee["isActive"] == isActive
 
+    #Удаление созданной компании вместе с сотрудниками
+    edited_company = api.delete_company(new_id)
+    assert edited_company["id"] == new_id
+    assert edited_company["name"] == name
+    assert edited_company["description"] == description
+    assert edited_company["isActive"] == True
+
 def test_get_list_employee():
     #Создание компании
-    name = "Зевс"
+    name = "Ранетка"
     description = "Компания для интересных людей"
     result = api.create_company(name, description)
     new_id = result["id"]
+
+    #Получение списка сотрудников компании
+    body = api.get_employee_list(params_to_add={'company': new_id})
+    len_before = len(body)
 
     #Создание сотрудника №1 в компании
     f_name = "Светлана"
@@ -54,9 +65,18 @@ def test_get_list_employee():
     api.create_employee(f_name, l_name, id_com, phone, isActive)
 
     #Получение списка сотрудников компании
-    body = api.get_employee_list()
+    body_2 = api.get_employee_list(params_to_add={'company': new_id})
+    len_after = len(body_2)
+    
+    #Проверка, что созданные сотрудники появились в списке сотрудников компании
+    assert len_after - len_before == 2
 
-    assert len(body) == 2
+    #Удаление созданной компании вместе с сотрудниками
+    edited_company = api.delete_company(new_id)
+    assert edited_company["id"] == new_id
+    assert edited_company["name"] == name
+    assert edited_company["description"] == description
+    assert edited_company["isActive"] == True
 
 def test_edit_employee():
     #Создание компании
@@ -88,3 +108,10 @@ def test_edit_employee():
     assert employee["lastName"] == new_lname
     assert employee["email"] == new_mail
     assert employee["isActive"] == False
+
+    #Удаление созданной компании вместе с сотрудниками
+    edited_company = api.delete_company(new_id)
+    assert edited_company["id"] == new_id
+    assert edited_company["name"] == name
+    assert edited_company["description"] == description
+    assert edited_company["isActive"] == True
